@@ -1,4 +1,4 @@
-let library = [];
+const library = [];
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -51,6 +51,20 @@ function displayLibrary() {
         let newBookCard = createBookCard(library[i]);
         container.appendChild(newBookCard);
     }
+}
+
+const addBookButton = document.querySelector("#add-book");
+const addBookModal = document.querySelector("#add-book-modal");
+addBookButton.addEventListener("click", () => {
+    addBookModal.showModal();
+});
+
+const submitButton = document.querySelector("#submit-button");
+submitButton.addEventListener("click", submitClick, false);
+
+function submitClick(event) {
+    console.log("test");
+    event.preventDefault();
 }
 
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);

@@ -11,23 +11,29 @@
     <h1>The Library</h1>
     <button id="add-book">Add New Book</button>
     <dialog id="add-book-modal">
-        <form>
+        <form id="add-book-form">
             <fieldset>
-                <legend>Enter details</legend>
+                <legend>Enter Details</legend>
 
-                <label for="new-title">Title:</label>
-                <input type="text" id="new-title" name="new-title">
+                <label>Title:
+                    <input type="text" id="new-title" name="new-title">
+                </label>
 
-                <label for="new-author">Author:</label>
-                <input type="text" id="new-author" name="new-author">
+                <label>Author:
+                    <input type="text" id="new-author" name="new-author">
+                </label>
 
-                <label for="new-pages">Pages:</label>
-                <input type="number" id="new-pages" name="new-pages">
+                <label>Pages:
+                    <input type="number" id="new-pages" name="new-pages">
+                </label>
 
-                <label for="new-read">Read?</label>
-                <input type="checkbox" id="new-read" name="new-read">
+                <label>Read?
+                    <input type="checkbox" id="new-read" name="new-read">
+                </label>
             </fieldset>
-            <button>Submit</button>
+            
+            <button formmethod="dialog">Cancel</button>
+            <button id="submit-button">Submit</button>
         </form>
     </dialog>
     <div id="library-container"></div>

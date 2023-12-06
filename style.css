@@ -41,12 +41,21 @@ h1, h2, h3 {
     margin-bottom: 5px;
 }
 
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
 #library-container {
     display: grid;
     grid-template-columns: 300px 300px;
     gap: 50px;
     justify-content: center;
     justify-items: center;
+}
+
+#book-title {
+    font-style: italic;
 }
 
 .book-card {
@@ -56,7 +65,3 @@ h1, h2, h3 {
     background-color: white;
 }
 
-fieldset {
-    display: flex;
-    flex-direction: column;
-}

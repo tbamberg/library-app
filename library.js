@@ -11,8 +11,8 @@ function addBookToLibrary(book) {
     let container = document.querySelector("#library-container");
     let newBookCard = createBookCard(book);
 
-    library.push(book);
     container.appendChild(newBookCard);
+    library.push(book);
 }
 
 function createBookCard(book) {
@@ -20,15 +20,15 @@ function createBookCard(book) {
     bookCard.setAttribute("class", "book-card");
     
     let titleText = document.createElement("h2");
-    titleText.setAttribute("class", "title");
+    titleText.setAttribute("class", "book-title");
     titleText.textContent = book.title;
 
     let authorText = document.createElement("h3");
-    authorText.setAttribute("class", "author");
+    authorText.setAttribute("class", "book-author");
     authorText.textContent = book.author;
 
     let pagesText = document.createElement("p");
-    pagesText.setAttribute("class", "pages");
+    pagesText.setAttribute("class", "book-pages");
     pagesText.textContent = book.pages + " pages";
 
     let readCheckbox = document.createElement("input");
@@ -56,21 +56,25 @@ function newBookHandler() {
     addBookToLibrary(newBook);
 }
 
+//event listeners to open, submit, and close the modal
 const addBookButton = document.querySelector("#add-book");
 const addBookModal = document.querySelector("#add-book-modal");
 addBookButton.addEventListener("click", () => {
     addBookModal.showModal();
 });
 
+const form = document.querySelector("#add-book-form");
 const submitButton = document.querySelector("#submit-button");
 submitButton.addEventListener("click", submitClick);
 
 function submitClick(event) {
     event.preventDefault();
     newBookHandler();
+    form.reset();
     addBookModal.close();
 }
 
+//default books to see the display
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);
 addBookToLibrary(book0);
 const book1 = new Book("The Way of Kings", "Brandon Sanderson", "1008", true);

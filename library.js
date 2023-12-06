@@ -14,30 +14,42 @@ function addBookToLibrary(book) {
     library.push(book);
 }
 
+function createBookCard(book) {
+    let bookCard = document.createElement("div");
+    bookCard.setAttribute("class", "book-card");
+    
+    let titleText = document.createElement("h2");
+    titleText.setAttribute("class", "title");
+    titleText.textContent = book.title;
+
+    let authorText = document.createElement("h3");
+    authorText.setAttribute("class", "author");
+    authorText.textContent = book.author;
+
+    let pagesText = document.createElement("p");
+    pagesText.setAttribute("class", "pages");
+    pagesText.textContent = book.pages + " pages";
+
+    let readCheckbox = document.createElement("input");
+    readCheckbox.setAttribute("type", "checkbox");
+    readCheckbox.setAttribute("class", "read");
+    readCheckbox.setAttribute("name", "read");
+    if (book.read) readCheckbox.checked = true;
+
+    let readLabel = document.createElement("label");
+    readLabel.textContent = "Read";
+    readLabel.appendChild(readCheckbox);
+
+    bookCard.append(titleText, authorText, pagesText, readLabel);
+
+    return bookCard;
+}
+
 function displayLibrary() {
     let container = document.querySelector("#library-container");
     for (i in library) {
-        let bookCard = document.createElement("div");
-        bookCard.setAttribute("class", "book-card");
-        
-        let titleText = document.createElement("h2");
-        titleText.setAttribute("class", "title");
-        titleText.textContent = library[i].title;
-
-        let authorText = document.createElement("h3");
-        authorText.setAttribute("class", "author");
-        authorText.textContent = library[i].author;
-
-        let pagesText = document.createElement("p");
-        pagesText.setAttribute("class", "pages");
-        pagesText.textContent = library[i].pages + " pages";
-
-        let readText = document.createElement("p");
-        readText.setAttribute("class", "read");
-        readText.textContent = "Read? " + library[i].read;
-
-        bookCard.append(titleText, authorText, pagesText, readText);
-        container.appendChild(bookCard);
+        let newBookCard = createBookCard(library[i]);
+        container.appendChild(newBookCard);
     }
 }
 

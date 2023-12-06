@@ -5,13 +5,14 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function() {
-        return title + " by " + author + ", " + pages + " pages, Read=" + read; 
-    };
 }
 
 function addBookToLibrary(book) {
+    let container = document.querySelector("#library-container");
+    let newBookCard = createBookCard(book);
+
     library.push(book);
+    container.appendChild(newBookCard);
 }
 
 function createBookCard(book) {
@@ -45,12 +46,14 @@ function createBookCard(book) {
     return bookCard;
 }
 
-function displayLibrary() {
-    let container = document.querySelector("#library-container");
-    for (i in library) {
-        let newBookCard = createBookCard(library[i]);
-        container.appendChild(newBookCard);
-    }
+function newBookHandler() {
+    let newTitle = document.querySelector("#new-title").value;
+    let newAuthor = document.querySelector("#new-author").value;
+    let newPages = document.querySelector("#new-pages").value;
+    let newRead = document.querySelector("#new-read").checked;
+    let newBook = new Book(newTitle, newAuthor, newPages, newRead);
+    
+    addBookToLibrary(newBook);
 }
 
 const addBookButton = document.querySelector("#add-book");
@@ -60,11 +63,12 @@ addBookButton.addEventListener("click", () => {
 });
 
 const submitButton = document.querySelector("#submit-button");
-submitButton.addEventListener("click", submitClick, false);
+submitButton.addEventListener("click", submitClick);
 
 function submitClick(event) {
-    console.log("test");
     event.preventDefault();
+    newBookHandler();
+    addBookModal.close();
 }
 
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);
@@ -75,5 +79,3 @@ const book2 = new Book("Sleeping Giants", "Sylvain Neuvel", "319", false);
 addBookToLibrary(book2);
 const book3 = new Book("The Fifth Season", "N.K. Jemisin", "512", true);
 addBookToLibrary(book3);
-
-displayLibrary();

@@ -83,6 +83,11 @@ function submitClick(event) {
     addBookModal.close();
 }
 
+const cancelButton = document.querySelector("#cancel-button");
+cancelButton.addEventListener("click", () => {
+    addBookModal.close();
+});
+
 //add starting books
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);
 addBookToLibrary(book0);

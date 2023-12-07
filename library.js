@@ -8,11 +8,20 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-    let container = document.querySelector("#library-container");
-    let newBookCard = createBookCard(book);
-
-    container.appendChild(newBookCard);
     library.push(book);
+    displayLibrary();
+}
+
+function displayLibrary() {
+    let container = document.querySelector("#library-container");
+    let books = document.querySelectorAll(".book-card")
+
+    books.forEach(book => container.removeChild(book));
+
+    for (i in library) {
+        let bookCard = createBookCard(library[i]);
+        container.appendChild(bookCard);
+    }
 }
 
 function createBookCard(book) {
@@ -33,7 +42,7 @@ function createBookCard(book) {
 
     let readCheckbox = document.createElement("input");
     readCheckbox.setAttribute("type", "checkbox");
-    readCheckbox.setAttribute("class", "read");
+    readCheckbox.setAttribute("class", "book-read");
     readCheckbox.setAttribute("name", "read");
     if (book.read) readCheckbox.checked = true;
 
@@ -74,7 +83,7 @@ function submitClick(event) {
     addBookModal.close();
 }
 
-//default books to see the display
+//add starting books
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);
 addBookToLibrary(book0);
 const book1 = new Book("The Way of Kings", "Brandon Sanderson", "1008", true);

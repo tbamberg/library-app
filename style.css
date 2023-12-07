@@ -34,6 +34,7 @@ table {
 
 body {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: antiquewhite;
 } 
 
@@ -54,7 +55,7 @@ fieldset {
     justify-items: center;
 }
 
-#book-title {
+.book-title {
     font-style: italic;
 }
 

@@ -26,14 +26,15 @@ function displayLibrary() {
     books.forEach(book => container.removeChild(book));
 
     for (i in library) {
-        let bookCard = createBookCard(library[i]);
+        let bookCard = createBookCard(library[i], library.indexOf(library[i]));
         container.appendChild(bookCard);
     }
 }
 
-function createBookCard(book) {
+function createBookCard(book, index) {
     let bookCard = document.createElement("div");
     bookCard.setAttribute("class", "book-card");
+    bookCard.setAttribute("data-index", index);
     
     let titleText = document.createElement("h2");
     titleText.setAttribute("class", "book-title");
@@ -47,14 +48,14 @@ function createBookCard(book) {
     pagesText.setAttribute("class", "book-pages");
     pagesText.textContent = book.pages + " pages";
 
-    let readCheckbox = document.createElement("input");
-    readCheckbox.setAttribute("type", "checkbox");
-    readCheckbox.setAttribute("class", "book-read");
-    readCheckbox.setAttribute("name", "read");
-    if (book.read) readCheckbox.checked = true;
-
     let readLabel = document.createElement("label");
     readLabel.textContent = "Read";
+    readLabel.setAttribute("class", "book-read");
+
+    let readCheckbox = document.createElement("input");
+    readCheckbox.setAttribute("type", "checkbox");
+    readCheckbox.setAttribute("name", "read");
+    if (book.read) readCheckbox.checked = true;
     readLabel.appendChild(readCheckbox);
 
     bookCard.append(titleText, authorText, pagesText, readLabel);

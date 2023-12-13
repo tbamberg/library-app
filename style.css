@@ -35,3 +35,8 @@ fieldset {
 .book-title {
     font-style: italic;
 }
+
+.book-card-bottom {
+    display: flex;
+    justify-content: space-around;
+}

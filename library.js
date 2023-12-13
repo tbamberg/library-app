@@ -48,17 +48,27 @@ function createBookCard(book, index) {
     pagesText.setAttribute("class", "book-pages");
     pagesText.textContent = book.pages + " pages";
 
+    let bookCardBottom = document.createElement("div");
+    bookCardBottom.setAttribute("class", "book-card-bottom");
+
     let readLabel = document.createElement("label");
     readLabel.textContent = "Read";
     readLabel.setAttribute("class", "book-read");
 
     let readCheckbox = document.createElement("input");
     readCheckbox.setAttribute("type", "checkbox");
-    readCheckbox.setAttribute("name", "read");
+    readCheckbox.setAttribute("name", "read-checkbox");
+    readCheckbox.setAttribute("class", "read-checkbox");
     if (book.read) readCheckbox.checked = true;
     readLabel.appendChild(readCheckbox);
 
-    bookCard.append(titleText, authorText, pagesText, readLabel);
+    let removeButton = document.createElement("button");
+    removeButton.setAttribute("class", "remove-button");
+    removeButton.innerText = "Remove";
+
+    bookCardBottom.append(readLabel, removeButton);
+
+    bookCard.append(titleText, authorText, pagesText, bookCardBottom);
 
     return bookCard;
 }
@@ -85,6 +95,27 @@ const cancelButton = document.querySelector("#cancel-button");
 cancelButton.addEventListener("click", () => {
     addBookModal.close();
 });
+
+//event listeners to mark/unmark as read or remove a book
+//add event listener to container because bookCard is created dynamically
+const libraryContainer = document.querySelector("#library-container");
+libraryContainer.addEventListener("click", (event) => {
+    let targetElement = event.target;
+    let bookCardIndex = targetElement.closest(".book-card").dataset.index;
+    
+    if (targetElement.className === "remove-button") {
+        library.splice(bookCardIndex, 1);
+        displayLibrary();
+    } 
+    else if (targetElement.className === "read-checkbox") {
+        toggleRead(bookCardIndex);
+    }
+});
+
+function toggleRead(index) {
+    let book = library[index];
+    book.read ? book.read = false : book.read = true;
+}
 
 //add starting books
 const book0 = new Book("The Hobbit", "J.R.R. Tolkien", "295", true);
